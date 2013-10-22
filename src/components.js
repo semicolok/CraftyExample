@@ -26,14 +26,30 @@ Crafty.c('Actor', {
 
 Crafty.c('Tree', {
 	init: function() {
-		this.requires('Actor, Color')
+		this.requires('Actor, Color, Solid')
 		.color('rgb(20, 125, 40)');
 	},
 });
  
 Crafty.c('Bush', {
 	init: function() {
-		this.requires('Actor, Color')
+		this.requires('Actor, Color, Solid')
 			.color('rgb(20, 185, 40)');
 	},
+});
+Crafty.c('PlayerCharacter', {
+	init: function(){
+		this.requires('Actor, Fourway, Color, Collision')
+		.fourway(4)
+		.color('rgb(20, 75, 40)')
+		.stopOnSolids();
+	},
+
+	stopOnSolids: function(){
+		this._speed = 0;
+		if (this._movement) {
+			this.x -= this._movement.x;
+			this.y -= this._movement.y;
+		}
+	}
 });
